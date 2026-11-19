@@ -1,0 +1,26 @@
+import {createContext,useContext} from 'react';
+import RW from './rw.json';
+const D={
+ en:{title:'IAP Liaison Book',sub:'Rwanda TVET Board · 2025',login:'Log in',create:'Create account',haveAcc:'I already have an account',newAcc:'Create a new account',
+  name:'Full name',iam:'I am a',email:'Email',password:'Password',school:'School',choose:'Choose your school',wait:'Please wait…',
+  learner:'Learner',teacher:'School supervisor (teacher)',company:'Company supervisor',pending:'Account created. The administrator must approve it before you can log in.',
+  logout:'Log out',back:'Back to learners',print:'Print this page',clear:'Clear all entries',myLearners:'My learners',open:'Open book',trade:'Trade',last:'Last update',
+  noLearners:'No learners yet. Ask your learners to add your email in their Profile.',noSchools:'No schools yet. The administrator must add schools first.',
+  admin:'Administration',learners:'Learners',teachers:'Teachers',companies:'Companies',schools:'Schools',addSchool:'Add a school',schoolName:'School name',district:'District',add:'Add',
+  approvals:'Teachers waiting for approval',approve:'Approve',reject:'Reject',none:'None',
+  tabs:['Profile','Competences','Attendance','Weekly reports','Company evaluation','School visit','Self-assessment','Interview and marks','Certificate'],
+  days:'Days recorded',hours:'Hours worked',eval:'Company evaluation',final:'Final IAP mark',saved:'All changes saved',saving:'Saving…',loading:'Loading…',error:'Could not save. Check your connection.',schoolType:'Type or choose your school',schoolHelp:'Not in the list? Type the full name of your school.',unverified:'Not verified',verify:'Verify',importTitle:'Import schools',importHelp:'One school per line: Name; District (district is optional).',import:'Import',imported:'Imported',offline:'Offline: your work is saved on this device and will upload when the internet returns.',reports:'National report',allDistricts:'All districts',exportXlsx:'Download Excel',started:'Started',withMark:'With final mark',avgHours:'Avg hours',avgFinal:'Avg final mark',activity:'Recent activity',when:'When',who:'Who',action:'Action',hoursShort:'Hours',finalShort:'Final mark',verifyTitle:'Certificate check',companyName:'Company',dates:'Period',valid:'This certificate is valid.',invalid:'No certificate found with this code. It may be false.',issuedOn:'Issued on',checking:'Checking…'},
+ rw:{title:'Igitabo cy’Ihuza (IAP)',sub:'RTB · Rwanda TVET Board · 2025',login:'Kwinjira',create:'Fungura konti',haveAcc:'Mfite konti',newAcc:'Fungura konti nshya',
+  name:'Amazina yose',iam:'Ndi',email:'Imeri',password:'Ijambo ry’ibanga',school:'Ishuri',choose:'Hitamo ishuri ryawe',wait:'Tegereza…',
+  learner:'Umunyeshuri',teacher:'Umwarimu ukurikirana (ishuri)',company:'Umukozi ukurikirana (ikigo)',pending:'Konti yafunguwe. Admin agomba kuyemeza mbere y’uko winjira.',
+  logout:'Gusohoka',back:'Subira ku banyeshuri',print:'Sohora urupapuro',clear:'Siba ibyanditse byose',myLearners:'Abanyeshuri banjye',open:'Fungura igitabo',trade:'Umwuga',last:'Ivugurura rya nyuma',
+  noLearners:'Nta munyeshuri uraboneka. Basabe bandike imeri yawe muri Profile yabo.',noSchools:'Nta shuri riraboneka. Admin agomba kubanza kongeramo amashuri.',
+  admin:'Ubuyobozi',learners:'Abanyeshuri',teachers:'Abarimu',companies:'Ibigo',schools:'Amashuri',addSchool:'Ongeramo ishuri',schoolName:'Izina ry’ishuri',district:'Akarere',add:'Ongeramo',
+  approvals:'Abarimu bategereje kwemezwa',approve:'Emeza',reject:'Anga',none:'Nta n’umwe',
+  tabs:['Umwirondoro','Ubumenyi ngiro','Ubwitabire','Raporo z’icyumweru','Isuzuma ry’ikigo','Gusura ishuri','Kwisuzuma','Ikiganiro n’amanota','Icyemezo'],
+  days:'Iminsi yanditswe',hours:'Amasaha yakozwe',eval:'Isuzuma ry’ikigo',final:'Amanota ya nyuma ya IAP',saved:'Byose byabitswe',saving:'Biri kubikwa…',loading:'Birimo gufunguka…',error:'Ntibyabitswe. Reba internet.',schoolType:'Andika cyangwa uhitemo ishuri ryawe',schoolHelp:'Ntiribonetse ku rutonde? Andika izina ryuzuye ry’ishuri ryawe.',unverified:'Ritaremezwa',verify:'Emeza',importTitle:'Injiza amashuri',importHelp:'Ishuri rimwe kuri buri murongo: Izina; Akarere (akarere ntabwo ari itegeko).',import:'Injiza',imported:'Byinjijwe',offline:'Nta internet: ibyo wanditse bibitswe kuri iki gikoresho kandi bizoherezwa internet nigaruka.',reports:'Raporo y’igihugu',allDistricts:'Uturere twose',exportXlsx:'Manura Excel',started:'Batangiye',withMark:'Bafite amanota ya nyuma',avgHours:'Amasaha yo hagati',avgFinal:'Amanota yo hagati',activity:'Ibyakozwe vuba',when:'Igihe',who:'Uwabikoze',action:'Igikorwa',hoursShort:'Amasaha',finalShort:'Amanota ya nyuma',verifyTitle:'Kugenzura icyemezo',companyName:'Ikigo',dates:'Igihe',valid:'Iki cyemezo ni ukuri.',invalid:'Nta cyemezo kibonetse gifite iyi kode. Gishobora kuba igihimbano.',issuedOn:'Cyatanzwe ku wa',checking:'Biragenzurwa…'}
+};
+export const LangCtx=createContext({lang:'en',setLang(){}});
+export const useT=()=>{const {lang,setLang}=useContext(LangCtx);const tr=x=>lang==='rw'&&typeof x==='string'?(RW[x]??x):x;return {t:D[lang]||D.en,lang,setLang,tr}};
+export const initialLang=()=>{try{return localStorage.getItem('iapLang')||'rw'}catch(e){return 'rw'}};
+export const saveLang=l=>{try{localStorage.setItem('iapLang',l)}catch(e){}};
